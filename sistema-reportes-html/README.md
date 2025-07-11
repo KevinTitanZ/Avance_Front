@@ -100,9 +100,19 @@ sistema-reportes-html/
   *Reporte de uso de laboratorio*
   ![Imgur](https://imgur.com/jZbKhkP.png)
   *Validacion de Coherencia de guias*
-
-  ![Imgur](https://imgur.com/JKaoiLF.png)
-   *Advertencias y estados*
+  
+**Seccion De reportes Pdf
+  ![Imgur][(https://imgur.com/a/3mv2LQf)](https://imgur.com/a/yEydZMR)
+   *Pdf de Reporte de Usuarios*
+  ![Imgur][(https://imgur.com/a/gh7mBhW)](https://imgur.com/a/ptbu3Mq)
+   *Pdf de Reporte de Laboratorios*
+  ![Imgur][(https://imgur.com/a/vOqSzkk)](https://imgur.com/a/6XbatRM)
+   *Pdf de Reporte de Asignaturas*
+  ![Imgur][(https://imgur.com/JKaoiLF.png)](https://imgur.com/a/45p9TOt)
+   *Pdf de Reporte de uso de Laboratorio*
+  ![Imgur][(https://imgur.com/JKaoiLF.png)](https://imgur.com/a/Z4cowjx)
+   *Pdf de Reporte de Seguimiento de Guías*
+   
 ## Conclusiones
 
 Este Sprint 1 permitió consolidar conocimientos sobre desarrollo frontend, arquitectura modular y generación de PDFs, además de demostrar la capacidad del equipo para adaptarse a limitaciones externas y entregar un producto funcional de calidad profesional. El sistema desarrollado sirve como base sólida para la integración de componentes distribuidos en sprints posteriores.
