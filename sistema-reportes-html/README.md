@@ -84,18 +84,25 @@ sistema-reportes-html/
 
 ## Capturas de Pantalla
 
-![Dashboard Principal](screenshots/dashboard-principal.png)
+![Vista general](https://imgur.com/AIo95T4.png)
 *Vista principal del sistema con acceso a todos los reportes*
 
-![Reporte de Usuarios](screenshots/reporte-usuarios.png)
+![Imgur](https://imgur.com/IjhdFuj.png)
 *Detalle del reporte de usuarios con exportación PDF*
 
-![Reporte de Laboratorios](screenshots/reporte-laboratorios.png)
+![Imgur](https://imgur.com/zhaqmXF.png)
 *Estado y ocupación de laboratorios*
 
-![Exportación PDF](screenshots/exportacion-pdf.png)
-*Ejemplo de PDF generado con formato institucional*
+![Imgur](https://imgur.com/23RzNnB.png)
+*Reporte de asignaturas*
 
+* ![Imgur](https://imgur.com/uX1i5wP.png)
+  *Reporte de uso de laboratorio*
+  ![Imgur](https://imgur.com/jZbKhkP.png)
+  *Validacion de Coherencia de guias*
+
+  ![Imgur](https://imgur.com/JKaoiLF.png)
+   *Advertencias y estados*
 ## Conclusiones
 
 Este Sprint 1 permitió consolidar conocimientos sobre desarrollo frontend, arquitectura modular y generación de PDFs, además de demostrar la capacidad del equipo para adaptarse a limitaciones externas y entregar un producto funcional de calidad profesional. El sistema desarrollado sirve como base sólida para la integración de componentes distribuidos en sprints posteriores.
