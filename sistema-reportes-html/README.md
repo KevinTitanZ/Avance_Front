@@ -101,16 +101,16 @@ sistema-reportes-html/
   ![Imgur](https://imgur.com/jZbKhkP.png)
   *Validacion de Coherencia de guias*
   
-**Seccion De reportes Pdf
-  ![Imgur][(https://imgur.com/a/3mv2LQf)](https://imgur.com/a/yEydZMR)
+**Seccion De reportes Pdf**
+  ![Imgur](https://i.imgur.com/KZJcRHp.png)
    *Pdf de Reporte de Usuarios*
-  ![Imgur][(https://imgur.com/a/gh7mBhW)](https://imgur.com/a/ptbu3Mq)
+  ![Imgur](https://i.imgur.com/M4NSuny.png)
    *Pdf de Reporte de Laboratorios*
-  ![Imgur][(https://imgur.com/a/vOqSzkk)](https://imgur.com/a/6XbatRM)
+  ![Imgur](https://i.imgur.com/BU76CPx.png)
    *Pdf de Reporte de Asignaturas*
-  ![Imgur][(https://imgur.com/JKaoiLF.png)](https://imgur.com/a/45p9TOt)
+  ![Imgur](https://i.imgur.com/itvCFxO.png)
    *Pdf de Reporte de uso de Laboratorio*
-  ![Imgur][(https://imgur.com/JKaoiLF.png)](https://imgur.com/a/Z4cowjx)
+  ![Imgur](https://imgur.com/ikX3uwh.png)
    *Pdf de Reporte de Seguimiento de Guías*
    
 ## Conclusiones
