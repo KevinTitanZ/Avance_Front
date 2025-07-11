@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Uso de Laboratorios - Sistema de Reportes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <i class="bi bi-graph-up me-2"></i>
+                Sistema de Reportes - Laboratorios
+            </a>
+            <span class="navbar-text">Universidad de las Fuerzas Armadas ESPE</span>
+        </div>
+    </nav>
+
+    <div class="loading-spinner">
+        <div class="container text-center py-5">
+            <div class="spinner-border text-info" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+            <p class="mt-3 text-muted">Cargando reporte de uso de laboratorios...</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container py-4">
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <h1 class="display-5 text-info">
+                        <i class="bi bi-clipboard-data me-2"></i>Reporte de Uso de Laboratorios
+                    </h1>
+                    <p class="lead text-muted">Registro detallado de equipos utilizados</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-outline-info me-2" onclick="exportarPDFUsos()">
+                        <i class="bi bi-file-pdf me-1"></i>Exportar PDF
+                    </button>
+                    <a href="../index.html" class="btn btn-info">
+                        <i class="bi bi-house me-1"></i>Dashboard
+                    </a>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-4">
+                <div class="col-md-3">
+                    <div class="card bg-info text-white">
+                        <div class="card-body text-center">
+                            <i class="bi bi-clipboard-data fs-1 mb-2"></i>
+                            <h3 id="totalRegistros">-</h3>
+                            <p>Total Registros</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body text-center">
+                            <i class="bi bi-clock fs-1 mb-2"></i>
+                            <h3 id="horasTotalesUso">-</h3>
+                            <p>Horas Totales</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-success text-white">
+                        <div class="card-body text-center">
+                            <i class="bi bi-cpu fs-1 mb-2"></i>
+                            <h3 id="equiposUtilizados">-</h3>
+                            <p>Equipos Utilizados</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-warning text-white">
+                        <div class="card-body text-center">
+                            <i class="bi bi-graph-up fs-1 mb-2"></i>
+                            <h3 id="promedioUsoSemanal">-</h3>
+                            <p>Promedio Semanal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="bi bi-list me-2"></i>Registro de Uso de Laboratorios</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Laboratorio</th>
+                                    <th>Asignatura</th>
+                                    <th>Docente</th>
+                                    <th>Estudiantes</th>
+                                    <th>Guía Ejecutada</th>
+                                    <th>Equipos</th>
+                                    <th>Horario</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usosTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    <script src="../assets/js/data.js"></script>
+    <script src="js/pdf-usos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showLoading();
+            
+            loadData(function() {
+                const data = mockData.usos;
+                
+                document.getElementById('totalRegistros').textContent = data.totalSesiones;
+                document.getElementById('horasTotalesUso').textContent = data.horasAcumuladas + 'h';
+                document.getElementById('equiposUtilizados').textContent = data.equiposUtilizados;
+                document.getElementById('promedioUsoSemanal').textContent = data.promedioSesion + 'h';
+                
+                const tbody = document.getElementById('usosTableBody');
+                tbody.innerHTML = '';
+                
+                data.detalleUsos.forEach(uso => {
+                    const row = document.createElement('tr');
+                    
+                    row.innerHTML = `
+                        <td>${uso.fecha}</td>
+                        <td>
+                            <div>
+                                <strong>${uso.laboratorio}</strong>
+                                <br><small class="text-muted">${uso.ubicacion}</small>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <strong>${uso.asignatura}</strong>
+                                <br><small class="text-muted">${uso.codigo}</small>
+                            </div>
+                        </td>
+                        <td>${uso.docente}</td>
+                        <td>
+                            <span class="badge bg-primary">${uso.estudiantes}</span>
+                        </td>
+                        <td>
+                            <small>${uso.guiaEjecutada}</small>
+                        </td>
+                        <td>
+                            <small>${uso.equipoUtilizado}</small>
+                        </td>
+                        <td>${uso.tiempoUso}</td>
+                        <td>
+                            <span class="badge bg-success">Completado</span>
+                        </td>
+                    `;
+                    
+                    tbody.appendChild(row);
+                });
+                
+                hideLoading();
+            }, 1500);
+        });
+
+        // La función exportarPDFUsos() está en js/pdf-usos.js
+    </script>
+</body>
+</html>

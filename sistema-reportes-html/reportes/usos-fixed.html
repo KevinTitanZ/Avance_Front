@@ -6,16 +6,16 @@
     <title>Reporte de Uso de Laboratorios - Sistema de Reportes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-info">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="../index.html">
                 <i class="bi bi-graph-up me-2"></i>
                 Sistema de Reportes - Laboratorios
             </a>
-            <span class="navbar-text">Universidad de las fuermas armadas  ESPE</span>
+            <span class="navbar-text">Universidad de las Fuerzas Armadas ESPE</span>
         </div>
     </nav>
 
@@ -38,7 +38,10 @@
                     <p class="lead text-muted">Registro detallado de equipos utilizados</p>
                 </div>
                 <div class="col-md-4 text-end">
-                    <a href="index.html" class="btn btn-info">
+                    <button class="btn btn-outline-info me-2" onclick="exportarPDFUsos()">
+                        <i class="bi bi-file-pdf me-1"></i>Exportar PDF
+                    </button>
+                    <a href="../index.html" class="btn btn-info">
                         <i class="bi bi-house me-1"></i>Dashboard
                     </a>
                 </div>
@@ -66,7 +69,7 @@
                 <div class="col-md-3">
                     <div class="card bg-success text-white">
                         <div class="card-body text-center">
-                            <i class="bi bi-tools fs-1 mb-2"></i>
+                            <i class="bi bi-cpu fs-1 mb-2"></i>
                             <h3 id="equiposUtilizados">-</h3>
                             <p>Equipos Utilizados</p>
                         </div>
@@ -85,7 +88,7 @@
 
             <div class="card">
                 <div class="card-header bg-info text-white">
-                    <h5 class="mb-0"><i class="bi bi-list me-2"></i>Detalle de Usos</h5>
+                    <h5 class="mb-0"><i class="bi bi-list me-2"></i>Registro de Uso de Laboratorios</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -97,7 +100,10 @@
                                     <th>Asignatura</th>
                                     <th>Docente</th>
                                     <th>Estudiantes</th>
-                                    <th>Duración</th>
+                                    <th>Guía Ejecutada</th>
+                                    <th>Equipos</th>
+                                    <th>Horario</th>
+                                    <th>Estado</th>
                                 </tr>
                             </thead>
                             <tbody id="usosTableBody">
@@ -110,7 +116,10 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    <script src="../assets/js/data.js"></script>
+    <script src="js/pdf-usos.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             showLoading();
@@ -118,10 +127,10 @@
             loadData(function() {
                 const data = mockData.usos;
                 
-                document.getElementById('totalRegistros').textContent = data.totalRegistros;
-                document.getElementById('horasTotalesUso').textContent = data.horasTotalesUso;
+                document.getElementById('totalRegistros').textContent = data.totalSesiones;
+                document.getElementById('horasTotalesUso').textContent = data.horasAcumuladas + 'h';
                 document.getElementById('equiposUtilizados').textContent = data.equiposUtilizados;
-                document.getElementById('promedioUsoSemanal').textContent = data.promedioUsoSemanal + 'h';
+                document.getElementById('promedioUsoSemanal').textContent = data.promedioSesion + 'h';
                 
                 const tbody = document.getElementById('usosTableBody');
                 tbody.innerHTML = '';
@@ -131,19 +140,42 @@
                     
                     row.innerHTML = `
                         <td>${uso.fecha}</td>
-                        <td><span class="badge bg-primary">${uso.laboratorio}</span></td>
-                        <td>${uso.asignatura}</td>
+                        <td>
+                            <div>
+                                <strong>${uso.laboratorio}</strong>
+                                <br><small class="text-muted">${uso.ubicacion}</small>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <strong>${uso.asignatura}</strong>
+                                <br><small class="text-muted">${uso.codigo}</small>
+                            </div>
+                        </td>
                         <td>${uso.docente}</td>
-                        <td>${uso.estudiantes}</td>
-                        <td>${uso.horaInicio} - ${uso.horaFin} (${uso.duracion}h)</td>
+                        <td>
+                            <span class="badge bg-primary">${uso.estudiantes}</span>
+                        </td>
+                        <td>
+                            <small>${uso.guiaEjecutada}</small>
+                        </td>
+                        <td>
+                            <small>${uso.equipoUtilizado}</small>
+                        </td>
+                        <td>${uso.tiempoUso}</td>
+                        <td>
+                            <span class="badge bg-success">Completado</span>
+                        </td>
                     `;
                     
                     tbody.appendChild(row);
                 });
                 
                 hideLoading();
-            }, 800);
+            }, 1500);
         });
+
+        // La función exportarPDFUsos() está en js/pdf-usos.js
     </script>
 </body>
 </html>
